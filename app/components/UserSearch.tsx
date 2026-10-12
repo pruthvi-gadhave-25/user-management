@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function UserSearch() {
 
   const [search, setSearch] = useState("");
-
+  
   return (
     <input
       type="text"

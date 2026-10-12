@@ -1,64 +1,48 @@
-import UserSearch from "@/app/components/UserSearch";
-
+import UsersClient from "@/app/components/UsersClient";
+import { getUserById, getUsers } from "@/services/UserService";
+import Link from "next/dist/client/link";
 type User = {
     id: number;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
 };
 
 export default async function Users() {
 
-    const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
-    );
-
-    const users: User[] = await response.json();
-
+    const users = await getUsers();
+    getUserById(15);
     return (
-        <div>
-            <div className="mb-8">
-        <h2 className="text-3xl font-bold text-blue-900">
-          Users
-        </h2>
+        <main>
+            <h1>Users</h1>
 
-        <p className="mt-2 text-gray-600">
-          Manage application users.
-        </p>
-      </div>
+            <table className="w-full border-collapse border border-gray-400">
+                <thead>
+                    <tr className="bg-gray-900">
+                        <th className="border border-gray-400 p-3">ID</th>
+                        <th className="border border-gray-400 p-3">First Name</th>
+                        <th className="border border-gray-400 p-3">Last Name</th>
+                        <th className="border border-gray-400 p-3">Email</th>
+                        <th className="border border-gray-400 p-3">Actions</th>
+                    </tr>
+                </thead>
 
-      <div className="mb-4  ">
-        <UserSearch/>
-      </div>
-
-      <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-        <table className="w-full">
-          <thead className="border-b bg-gray-50">
-            <tr>
-              <th className="px-6 py-4 text-left  text-blue-900">
-                Name
-              </th>
-
-              <th className="px-6 py-4 text-left  text-blue-900">
-                Email
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id} className="border-b">
-                <td className="px-6 py-4 text-gray-900">
-                  {user.name}
-                </td>
-
-                <td className="px-6 py-4 text-gray-900">
-                  {user.email}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-        </div>
+                <tbody>
+                    {users.map((user: User) => (
+                        <tr key={user.id}>
+                            <td className="border border-gray-400 p-3 text-black">{user.id}</td>
+                            <td className="border border-gray-400 p-3 text-black">{user.firstName}</td>
+                            <td className="border border-gray-400 p-3 text-black">{user.lastName}</td>
+                            <td className="border border-gray-400 p-3 text-black">{user.email}</td>
+                            <td className="border border-gray-400 p-3 text-black">
+                                <Link href={`/users/${user.id}`}>View</Link>
+                                {" | "}
+                                <Link href={`/users/${user.id}/edit`}>Edit</Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </main>
     )
 }

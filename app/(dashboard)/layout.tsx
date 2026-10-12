@@ -3,15 +3,15 @@ import Link from "next/link";
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
 
     return (
-        <div className="min-h-screen bg-grey-100">
+        <div className="min-h-screen">
 
-            <header className="h-16 bg-white border-b flex items-center px-6">
-                <h1 className="text-xl font-semibold text-gray-800">
+            <header className="h-16 border-b flex items-center px-6">
+                <h1 className="text-xl font-semibold">
                     User Management System
                 </h1>
             </header>
-           <div className="flex min-h-[calc(100vh-64px)]">
-             <aside className="w-64 bg-gray-900 text-white p-5">
+           <div className="flex min-h-[calc(100vh-64px)] bg-white">
+             <aside className="w-64 p-5 bg-black">
                 
                 <nav  className="space-y-2">
                     <div>
