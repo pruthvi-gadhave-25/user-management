@@ -1,16 +1,18 @@
-import { AnyMxRecord } from "node:dns";
+import { log } from "console";
 
-const API_URL = "https://dummyjson.com/users";
+//const API_URL = "https://dummyjson.com/users";
+const API_URL = "https://6acdc976f338359cf1c25283.mockapi.io/api/v1/users";
 
 export async function getUsers() {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL);    
     console.log(res);
     if (!res.ok) {
         throw new Error("Failed to fetch users");
     }
 
     const data = await res.json();
-    return data.users;
+    console.log(data);
+    return data;
 }
 
 
@@ -25,11 +27,10 @@ export async function getUserById(id:any) {
   return res.json();
 }
 
-getUserById(15) ;
 
 // POST: Create user
 export async function createUser(user:any) {
-  const res = await fetch(`${API_URL}/add`, {
+  const res = await fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
@@ -47,14 +48,14 @@ export async function updateUser(id:any, user:any) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
   });
-
+console.log(res);
   if (!res.ok) throw new Error("Failed to update user");
 
   return res.json();
 }
 
 // DELETE: Delete user
-export async function deleteUser(id:AnyMxRecord) {
+export async function deleteUser(id:any) {
   const res = await fetch(`${API_URL}/${id}`, {
     method: "DELETE",
   });

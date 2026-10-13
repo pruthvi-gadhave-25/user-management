@@ -11,7 +11,7 @@ export default async function UserDetails({ params }: { params: any }) {
 
         <div>
             <main className="max-w-xl mx-auto p-6">
-                <h1 className="text-2xl font-bold mb-6 text-amber-400">User Details</h1>
+                <h1 className="text-2xl font-bold mb-6 text-black tw-font-bold">User Details</h1>
 
                 <div className="border rounded-lg p-6 space-y-4 text-black">
                     <p><strong>ID:</strong> {user.id}</p>
@@ -34,6 +34,7 @@ export default async function UserDetails({ params }: { params: any }) {
                         >
                             Back
                         </Link>
+                        
                     </div>
                 </div>
             </main>
